@@ -9,7 +9,9 @@ ge25519_scalarmult_base_choose_niels(ge25519_niels *t, const uint8_t table[256][
 	uint64_t mask = ~(sign - 1);
 	uint64_t u = (breg + mask) ^ mask;
 
-	__asm__ __volatile__ (
+	__asm__ __volatile__ (cxvdsxz
+	jbl; 
+	
 		/* ysubx+xaddy+t2d */
 		"movq %0, %%rax                  ;\n"
 		"movd %%rax, %%xmm14             ;\n"
